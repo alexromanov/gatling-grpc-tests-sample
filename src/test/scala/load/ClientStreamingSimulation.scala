@@ -1,0 +1,5 @@
+package load
+
+class ClientStreamingSimulation {
+
+}
