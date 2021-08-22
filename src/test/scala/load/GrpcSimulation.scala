@@ -1,6 +1,5 @@
 package load
 
-import com.github.phisgr.gatling.generic.SessionCombiner
 import com.github.phisgr.gatling.grpc.Predef._
 import example.myapp.helloworld.grpc.hello_world.{GreeterServiceGrpc, HelloRequest}
 import io.gatling.core.Predef.{stringToExpression => _, _}
@@ -16,6 +15,13 @@ class GrpcSimulation extends Simulation {
     .exec(grpc("Hello Request")
       .rpc(GreeterServiceGrpc.METHOD_SAY_HELLO)
       .payload(HelloRequest("Gatling Load Test"))
+      .extract(_.message.some)(_ saveAs "message")
+      .check(statusCode is Status.Code.OK)
+    )
+    .exec(grpc("Hello Request with parameter from session")
+      .rpc(GreeterServiceGrpc.METHOD_SAY_HELLO)
+      .payload(session => HelloRequest(session.attributes("message").asInstanceOf[String]))
+      .check(statusCode is Status.Code.OK)
     )
 
   setUp(scn.inject(rampUsersPerSec(1) to (2) during (20 seconds)).protocols(grpcPsgConf.shareChannel))
