@@ -10,10 +10,10 @@ object Dependencies {
   )
 
   val gatlingDependencies = Seq(
-    "io.gatling.highcharts" % "gatling-charts-highcharts" % gatlingVersion,
-    "io.gatling" % "gatling-test-framework" % gatlingVersion,
-    "com.github.phisgr" % "gatling-grpc" % "0.11.1",
-    "com.github.phisgr" % "gatling-ext" % "0.2.0"
+    "io.gatling.highcharts" % "gatling-charts-highcharts" % gatlingVersion % Test,
+    "io.gatling" % "gatling-test-framework" % gatlingVersion % Test,
+    "com.github.phisgr" % "gatling-grpc" % "0.11.1" % Test,
+    "com.github.phisgr" % "gatling-ext" % "0.2.0" % Test
   )
 
   val loggingDependencies = Seq(

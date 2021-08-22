@@ -1,5 +1,0 @@
-package load
-
-class BiDirectionalStreamingSimulation {
-
-}
